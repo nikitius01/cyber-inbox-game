@@ -17,7 +17,7 @@ backend/.gocache/
 .gocache/
 *.test
 *.out
-*.profч]ч
+*.prof
 coverage.out
 backend/tmp/
 backend/bin/
