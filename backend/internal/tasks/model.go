@@ -83,8 +83,11 @@ type AnswerChoice struct {
 }
 
 type AnswerResult struct {
-	IsCorrect     bool      `json:"isCorrect"`
-	CorrectAnswer string    `json:"correctAnswer"`
-	RedFlags      []RedFlag `json:"redFlags"`
-	Explanation   string    `json:"explanation"`
+	IsCorrect       bool      `json:"isCorrect"`
+	UserAnswer      string    `json:"userAnswer"`
+	CorrectAnswer   string    `json:"correctAnswer"`
+	FeedbackTitle   string    `json:"feedbackTitle"`
+	FeedbackMessage string    `json:"feedbackMessage"`
+	RedFlags        []RedFlag `json:"redFlags"`
+	Explanation     string    `json:"explanation"`
 }

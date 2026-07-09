@@ -1,4 +1,4 @@
-import { RotateCcw } from 'lucide-react';
+import { BadgeCheck, RotateCcw, TriangleAlert } from 'lucide-react';
 import { safeText } from '../utils/sanitize.js';
 
 export default function ResultModal({ result, onNext }) {
@@ -10,7 +10,13 @@ export default function ResultModal({ result, onNext }) {
           {result.isCorrect ? 'Верный разбор' : 'Разбор ошибки'}
         </span>
         <h2>{result.correctAnswer === 'phishing' ? 'Это фишинг' : 'Это легитимное письмо'}</h2>
-        <p>{safeText(result.explanation)}</p>
+        <div className={result.isCorrect ? 'feedback-box ok' : 'feedback-box bad'}>
+          {result.isCorrect ? <BadgeCheck size={20} /> : <TriangleAlert size={20} />}
+          <div>
+            <strong>{safeText(result.feedbackTitle || (result.isCorrect ? 'Верно' : 'Почему неверно'))}</strong>
+            <p>{safeText(result.feedbackMessage || result.explanation)}</p>
+          </div>
+        </div>
       </div>
       <div className="flags">
         {result.redFlags?.length ? result.redFlags.map((flag, index) => (
@@ -27,4 +33,3 @@ export default function ResultModal({ result, onNext }) {
     </aside>
   );
 }
-

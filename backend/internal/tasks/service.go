@@ -35,12 +35,33 @@ func (s *Service) CheckAnswer(id, answer string) (Task, AnswerResult, error) {
 	if task.IsPhishing {
 		correct = "phishing"
 	}
-	return task, AnswerResult{
-		IsCorrect:     answer == correct,
-		CorrectAnswer: correct,
-		RedFlags:      task.RedFlags,
-		Explanation:   task.Explanation,
-	}, nil
+	return task, BuildAnswerResult(task, answer, correct), nil
+}
+
+func BuildAnswerResult(task Task, userAnswer, correct string) AnswerResult {
+	isCorrect := userAnswer == correct
+	title := "Верный разбор"
+	message := "Ответ принят. Ты правильно определил тип письма."
+	if !isCorrect {
+		title = "Почему ответ неверный"
+		message = "Нужно было выбрать: " + answerLabel(correct) + ". " + task.Explanation
+	}
+	return AnswerResult{
+		IsCorrect:       isCorrect,
+		UserAnswer:      userAnswer,
+		CorrectAnswer:   correct,
+		FeedbackTitle:   title,
+		FeedbackMessage: message,
+		RedFlags:        task.RedFlags,
+		Explanation:     task.Explanation,
+	}
+}
+
+func answerLabel(answer string) string {
+	if answer == "phishing" {
+		return "Фишинг"
+	}
+	return "Легитимное письмо"
 }
 
 func ToPublicTask(task Task) PublicTask {

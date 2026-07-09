@@ -119,12 +119,7 @@ func (s *Service) CheckAnswer(r *http.Request) (tasks.AnswerResult, error) {
 	if task.IsPhishing {
 		correct = "phishing"
 	}
-	return tasks.AnswerResult{
-		IsCorrect:     req.Answer == correct,
-		CorrectAnswer: correct,
-		RedFlags:      task.RedFlags,
-		Explanation:   task.Explanation,
-	}, nil
+	return tasks.BuildAnswerResult(task, req.Answer, correct), nil
 }
 
 func validateTask(task tasks.Task) error {

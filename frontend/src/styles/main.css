@@ -191,6 +191,29 @@ pre { margin: 10px 0 0; padding: 14px; background: var(--code-bg); color: var(--
 .result-panel { padding: 18px; position: sticky; top: 84px; display: grid; gap: 16px; }
 .result-panel h2 { margin: 12px 0 8px; }
 .result-panel p { color: var(--muted); line-height: 1.5; }
+.feedback-box {
+  margin-top: 12px; padding: 14px; border-radius: 8px; display: grid; grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px; align-items: start; border: 1px solid var(--border); background: var(--surface-soft);
+}
+.feedback-box strong { display: block; margin-bottom: 4px; }
+.feedback-box p { margin: 0; color: var(--text); }
+.feedback-box.ok { border-color: #74c99b; background: color-mix(in srgb, #dff6ea 58%, var(--surface)); }
+.feedback-box.bad { border-color: #f0a68d; background: color-mix(in srgb, #fff3ef 68%, var(--surface)); }
+.feedback-box.ok svg { color: #1d7c57; }
+.feedback-box.bad svg { color: #b63d25; }
+
+:root[data-theme="dark"] .feedback-box.ok {
+  background: color-mix(in srgb, #123d2a 72%, var(--surface));
+}
+
+:root[data-theme="dark"] .feedback-box.bad {
+  background: color-mix(in srgb, #4a2118 72%, var(--surface));
+}
+
+:root[data-theme="dark"] .feedback-box p,
+:root[data-theme="dark"] .feedback-box strong {
+  color: #f3f7f4;
+}
 .result-pill { height: fit-content; display: inline-flex; padding: 7px 10px; border-radius: 999px; font-weight: 900; font-size: 12px; text-transform: uppercase; }
 .result-pill.ok { color: #12613f; background: #dff6ea; }
 .result-pill.bad { color: #9b2d17; background: #ffe2d8; }
